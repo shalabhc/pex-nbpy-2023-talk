@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="@@base@@" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, height=device-height, initial-scale=1" />
+    <link rel="stylesheet" href="engine/main.css" />
+    <link rel="stylesheet" href="theme/copenhagen.css" />
+    <link rel="stylesheet" href="engine/katex/katex.min.css" />
+    <!--<link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />-->
+    <style>
+    :root{
+--logo: /assets/dagster-primary-mark.png;
+--darkaccent1color: #E1EBE3;
+--lightaccent1color: #6E9075;
+--accent2: #43aa8b;
+--accent3: #f9c74f;
+--accent4: #90be6d;
+--accent5: #f8961e;
+--accent6: #577590;
+--lighttitletextcolor: #ffffffe6;
+--darktitletextcolor: #000000b3;
+--lightbodytextcolor: #ffffffe6;
+--darkbodytextcolor: #000000b3;
+--lightbackgroundcolor: #ffffff;
+--darkbackgroundcolor: transparent;
+--bodyfont: Albert Sans;
+--titlefont: Albert Sans;
+} 
+
+    </style>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="engine/print.css"
+      media="print"
+    />
+  </head>
+
+  <body class="responsive">
+    <div class="reveal">
+      <div class="slides"><section class="variable-size-headings has-footer light cover-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h1 id="deployyourpythoncodefasterwithpex">Deploy Your Python Code Faster with PEX</h1>
+
+<h6 id="northbaypython2023">North Bay Python 2023</h6>
+
+<h6 id="shalabhchaturvedi">Shalabh Chaturvedi</h6>
+
+<h6 id="dagstercloud">Dagster Cloud</h6></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">1</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light section-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-section" style="width: 100%; font-size: 1rem;">
+        <div style="">
+          <h3 id="⓵context">⓵ context</h3>
+
+<h3 id="⓶problem">⓶ problem</h3>
+
+<h3 id="⓷solution">⓷ solution</h3>
+
+<h3 id="⓸bonus">⓸ bonus</h3>
+        </div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">2</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light full-image-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/dagster-primary-vertical.png" class=" size-contain position-center-center"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">3</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light full-image-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/dagster-local-screenshot.png" class=" size-contain position-center-center"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">4</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light title-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-title" style="width: 100%; font-size: 1rem;">
+        <div style=""><h2 id="dagstercloud">Dagster Cloud</h2>
+
+<h4 id="serverlesshybrid"><mark>Serverless</mark> | Hybrid</h4></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">5</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light full-image-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/cloud-deploy.png" class=" size-contain position-center-center"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">6</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="sharedenvironments">Shared Environments</h3>
+
+<div class="single-image-wrapper"><img src="images/visuals-north-bay-python.001_2.png" class=" size-contain position-center-center"></div></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">7</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light grid-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-3" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="buildanddeploy">Build and Deploy</h1></div><div style=""><h3 id="ci">CI</h3>
+
+<ul>
+<li>docker build <code class="hljs arduino">image:tag</code></li>
+<li>docker push <code class="hljs arduino">image:tag</code></li>
+</ul></div><div style=""><h3 id="cloud">Cloud</h3>
+
+<ul>
+<li>deploy new container with <code class="hljs arduino">image:tag</code></li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">8</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><blockquote class="is-single-quote"><div class="line"></div>
+<p>Developers, developers, developers ... </p>
+<div class="line"></div></blockquote></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">9</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light has-background-image grid-container present has-light-background fitted" data-background-size="contain" data-background-image="images/deploy-chart.png" style="display: grid;" data-updated="true">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-0" style="width: 100%; font-size: 1rem;">
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">10</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light cover-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="options">Options</h1>
+
+<p>A. Speed up Docker builds</p>
+
+<p>B. Speed up container deploys</p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">11</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light v-split-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="dockerbuildfunfacts">Docker Build Fun Facts</h1></div>
+        <div style=""><ol>
+<li>not fully incremental</li>
+<li>not deterministic</li>
+</ol></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">12</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light grid-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-3 media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="fargatedeployfunfacts">Fargate Deploy Fun Facts</h1></div><div style=""><ol>
+<li>45s to 60s+ to provision</li>
+<li>no image caching</li>
+</ol></div><img src="images/fargate-bug.png" class=" size-contain position-center-center" style="">
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">13</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light cover-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="options">Options</h1>
+
+<p>A. <del>Speed up docker builds</del></p>
+
+<p>B. <del>Speed up container deploys</del> </p>
+
+<p>C. <em>something else?</em></p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">14</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light cover-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-cover" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="perspective">Perspective</h1>
+
+<p>❌ Deploy Docker </p>
+
+<p>✅ Synchronize Environments</p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">15</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><p style="width: 100%;"><span class="math katex-rendered"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>e</mi><mi>n</mi><mi>v</mi><mi>i</mi><mi>r</mi><mi>o</mi><mi>n</mi><mi>m</mi><mi>e</mi><mi>n</mi><mi>t</mi><mo>=</mo><mi>b</mi><mi>a</mi><mi>s</mi><mi>e</mi><mo>+</mo><mi>d</mi><mi>e</mi><mi>p</mi><mi>s</mi><mo>+</mo><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">environment =base + deps + code</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6595em;"></span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right: 0.0359em;">v</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">nm</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.7778em; vertical-align: -0.0833em;"></span><span class="mord mathnormal">ba</span><span class="mord mathnormal">se</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.8889em; vertical-align: -0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">p</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span></span></span></span></span></span></p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">16</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="whatispex">What is PEX?</h1>
+
+<div class="single-image-wrapper"><img src="images/pants-github.png" class=" size-contain position-center-center"></div></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">17</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present fit-warning has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.672rem;">
+        <div style=""><h2 id="bundlepackagesintoonefile">Bundle Packages into one File</h2>
+
+<pre><code class="text hljs plaintext">% pex dagster pandas -o out.pex
+</code></pre>
+
+<pre><code class="text hljs plaintext">% ./out.pex
+Python 3.8.16 (default, Dec  7 2022, 01:24:57)
+[Clang 14.0.0 (clang-1400.0.29.202)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+&gt;&gt;&gt; import dagster
+&gt;&gt;&gt; import pandas
+&gt;&gt;&gt;
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">18</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="isolated">Isolated</h1>
+
+<pre><code class="text hljs plaintext">% pip install pandas
+% pex dagster -o dagster.pex
+% ./dagster.pex
+&gt;&gt;&gt; import dagster  # OK
+&gt;&gt;&gt; import pandas   # ImportError
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">19</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="composable">Composable</h1>
+
+<pre><code class="text hljs plaintext">% pex dagster -o dagster.pex
+% pex pandas -o pandas.pex
+
+% export PEX_PATH=pandas.pex
+% ./dagster.pex
+&gt;&gt;&gt; import dagster  # OK
+&gt;&gt;&gt; import pandas   # OK
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">20</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="deterministic">Deterministic</h1>
+
+<pre><code class="text hljs plaintext">% pex dagster pandas -o out.pex | sha256sum
+e3b0c4429... 
+
+% pex pandas dagster -o out.pex | sha256sum
+e3b0c4429... 
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">21</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h1 id="cross-buildable">Cross-buildable*</h1>
+
+<pre><code class="text hljs plaintext">% uname
+Darwin
+
+% pex dagster --complete-platform=linux-target.json -o dagster-linux.pex
+</code></pre>
+
+<p>*requires wheels, or pure python packages</p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">22</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><p style="width: 100%;"><span class="math katex-rendered"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>e</mi><mi>n</mi><mi>v</mi><mi>i</mi><mi>r</mi><mi>o</mi><mi>n</mi><mi>m</mi><mi>e</mi><mi>n</mi><mi>t</mi><mo>=</mo><mi>b</mi><mi>a</mi><mi>s</mi><mi>e</mi><mo>+</mo><mi>d</mi><mi>e</mi><mi>p</mi><mi>s</mi><mo>+</mo><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">environment =base + deps + code</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6595em;"></span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right: 0.0359em;">v</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">nm</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.7778em; vertical-align: -0.0833em;"></span><span class="mord mathnormal">ba</span><span class="mord mathnormal">se</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.8889em; vertical-align: -0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">p</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.6944em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span></span></span></span></span></span></p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">23</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.813rem;">
+        <div style=""><p style="width: 100%;"><span class="math katex-rendered"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>e</mi><mi>n</mi><mi>v</mi><mi>i</mi><mi>r</mi><mi>o</mi><mi>n</mi><mi>m</mi><mi>e</mi><mi>n</mi><mi>t</mi><mo>=</mo><mi>i</mi><mi>m</mi><mi>a</mi><mi>g</mi><mi>e</mi><mo>+</mo><mi>d</mi><mi>e</mi><mi>p</mi><mi>s</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>e</mi><mi>x</mi><mo>+</mo><mi>s</mi><mi>o</mi><mi>u</mi><mi>r</mi><mi>c</mi><mi>e</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>e</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">environment =image + deps.pex + source.pex</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.6595em;"></span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right: 0.0359em;">v</span><span class="mord mathnormal">i</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">nm</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.854em; vertical-align: -0.1944em;"></span><span class="mord mathnormal">ima</span><span class="mord mathnormal" style="margin-right: 0.0359em;">g</span><span class="mord mathnormal">e</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.8889em; vertical-align: -0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">p</span><span class="mord mathnormal">s</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">e</span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right: 0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right: 0.2222em;"></span></span><span class="base"><span class="strut" style="height: 0.625em; vertical-align: -0.1944em;"></span><span class="mord mathnormal">so</span><span class="mord mathnormal">u</span><span class="mord mathnormal">rce</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">e</span><span class="mord mathnormal">x</span></span></span></span></span></span></p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">24</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light grid-container present fit-warning has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-3" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h2 id="fullbuild">Full build</h2></div><div style=""><h3 id="ci">CI</h3>
+
+<ul>
+<li>build <code class="hljs">deps.pex</code></li>
+<li>build <code class="hljs gradle"><span class="hljs-keyword">source</span>.pex</code></li>
+<li>upload to s3</li>
+</ul></div><div style=""><h3 id="cloud">Cloud</h3>
+
+<ul>
+<li>new container, standard image</li>
+<li>download pex files</li>
+<li><code class="hljs ini"><span class="hljs-attr">PEX_PATH</span>=deps.pex ./source.pex</code></li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">25</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light grid-container present fit-warning has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-3" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h2 id="dependencybuild">Dependency build</h2></div><div style=""><h3 id="ci">CI</h3>
+
+<ul>
+<li>build <code class="hljs">deps.pex</code></li>
+<li>build <code class="hljs gradle"><span class="hljs-keyword">source</span>.pex</code></li>
+<li>upload</li>
+</ul></div><div style=""><h3 id="cloud">Cloud</h3>
+
+<ul>
+<li>same container</li>
+<li>download new pex files</li>
+<li><code class="hljs ini"><span class="hljs-attr">PEX_PATH</span>=deps.pex ./source.pex</code></li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">26</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light grid-container present fit-warning has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-3" style="width: 100%; font-size: 0.766rem;">
+        <div style=""><h2 id="fastbuild">Fast build</h2></div><div style=""><h3 id="ci">CI</h3>
+
+<ul>
+<li>build <code class="hljs gradle"><span class="hljs-keyword">source</span>.pex</code></li>
+<li>upload</li>
+</ul></div><div style=""><h3 id="cloud">Cloud</h3>
+
+<ul>
+<li>same container</li>
+<li>download <code class="hljs gradle"><span class="hljs-keyword">source</span>.pex</code></li>
+<li><code class="hljs ini"><span class="hljs-attr">PEX_PATH</span>=deps.pex ./source.pex</code></li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">27</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light full-image-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-full-image media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><div class="single-image-wrapper"><img src="images/deploy-chart-pex.png" class=" size-contain position-center-center"></div></div>
+        
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">28</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><p style="width: 100%;"><span class="math katex-rendered"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>180</mn><mi>s</mi><mi mathvariant="normal">/</mi><mn>35</mn><mi>s</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">180s / 35s = 5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">180</span><span class="mord mathnormal">s</span><span class="mord">/35</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right: 0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.2778em;"></span></span><span class="base"><span class="strut" style="height: 0.6444em;"></span><span class="mord">5</span></span></span></span></span></span></p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">29</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light grid-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-1 media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="fastfeedback">Fast feedback</h1>
+
+<div class="layout-grid media-grid grid-items-2"><img src="images/deploy-log-1.png" class=" size-contain position-center-center"><img src="images/deploy-log-2.png" class=" size-contain position-center-center"></div>
+
+</div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">30</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.906rem;">
+        <div style=""><h2 id="repeatable">Repeatable</h2>
+
+<h4 id="docker">Docker</h4>
+
+<pre><code class="text hljs plaintext">image_tag = '12a'
+</code></pre>
+
+<h4 id="pex">Pex</h4>
+
+<pre><code class="text hljs plaintext">image_tag = '45b'
+pex_tag = 'deps-78c.pex:source-90e.pex'
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">31</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="tradeoffs">Trade offs</h1>
+
+<ul>
+<li>CPU and memory isolation</li>
+<li>restart from failures</li>
+<li>python dependency cross-builds</li>
+</ul></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">32</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light v-split-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-v-split" style="width: 100%; font-size: 1rem;">
+        <div style=""><h1 id="bonuscontent">Bonus Content</h1></div>
+        <div style=""><blockquote class="is-single-quote"><div class="line"></div>
+<p>So you don’t want to ship code outside Docker images?</p>
+<div class="line"></div></blockquote></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">33</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.953rem;">
+        <div style=""><h1 id="throwawayvirtualenvironments">Throwaway virtual environments</h1>
+
+<pre><code class="hljs python-repl">% pex polars
+<span class="hljs-meta">&gt;&gt;&gt;</span> <span class="python"><span class="hljs-keyword">import</span> polars</span>
+<span class="hljs-meta">&gt;&gt;&gt;</span>
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">34</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present fit-warning has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.531rem;">
+        <div style=""><h1 id="fastercustomactionsongithub">Faster custom actions on GitHub</h1>
+
+<pre><code class="text hljs plaintext"># old
+name: 'Custom action'
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/...'
+</code></pre>
+
+<pre><code class="text hljs plaintext"># new
+name: 'Custom action'
+runs:
+  using: 'composite'
+  steps:
+    - run: ./my-action.pex
+      shell: bash
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">35</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present fit-warning has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.485rem;">
+        <div style=""><h1 id="pexfilesasintermediateartifactsfordockerbuilds">PEX files as intermediate artifacts for Docker builds</h1>
+
+<pre><code class="text hljs plaintext">
+# Typical Dockerfile
+FROM python:...
+.
+.
+pip install a bunch of dependencies
+
+</code></pre>
+
+<pre><code class="text hljs plaintext"># PEX based Dockerfile
+FROM python: ...
+.
+.
+COPY my-app.pex /
+# unpack into a venv
+RUN PEX_TOOLS=1 ./my-app.pex venv --compile /my-app
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">36</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light grid-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-3 media-grid" style="width: 100%; font-size: 1rem;">
+        <div style=""><blockquote class="is-single-quote"><div class="line"></div>
+<p>search for "pex docker" https://blog.pantsbuild.org</p>
+<div class="line"></div></blockquote></div><img src="images/pants-blog-2.png" class=" size-contain position-center-center" style=""><img src="images/pants-blog-1.png" class=" size-contain position-center-center" style="">
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">37</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section><section class="variable-size-headings has-footer light default-container present fit-warning has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 0.672rem;">
+        <div style=""><h1 id="distributetoolsasexecutables">Distribute tools as executables</h1>
+
+<pre><code class="text hljs plaintext"># old readme
+
+## Installation
+pip install my-app
+</code></pre>
+
+<pre><code class="hljs vala"><span class="hljs-meta"># new readme</span>
+
+<span class="hljs-meta">## Installation</span>
+wget http:<span class="hljs-comment">//.../my-app.pex</span>
+</code></pre></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">38</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light default-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-default" style="width: 100%; font-size: 1rem;">
+        <div style=""><blockquote class="is-single-quote"><div class="line"></div>
+<p>Reframe problems often</p>
+<div class="line"></div></blockquote></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">39</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+      
+</section><section class="variable-size-headings has-footer light grid-container present has-light-background fitted" data-updated="true" style="display: grid;">
+
+      <div class="header"><div class="leading"></div><div class="middle"></div><div class="trailing"></div></div>
+      <div class="layout-grid grid-items-3" style="width: 100%; font-size: 1rem;">
+        <div style=""><h3 id="pex">PEX</h3>
+
+<p><a href="https://pantsbuild.org">pantsbuild.org</a></p>
+
+<p><a href="https://pex.readthedocs.io">pex.readthedocs.io</a></p></div><div style=""><h3 id="dagster">Dagster</h3>
+
+<p><a href="https://dagster.io">dagster.io</a></p></div><div style=""><h3 id="me">Me</h3>
+
+<p><a href="https://twitter.com/chatur_shalabh">twitter.com/chatur_shalabh</a> </p>
+
+<p><a href="https://discuss.systems/@shalabh">discuss.systems/@shalabh</a> </p></div>
+      </div>
+      <div class="footnotes"></div>
+      <div class="footer"><div class="leading">40</div><div class="middle"></div><div class="trailing">nbpy2023</div></div>
+</section></div>
+    </div>
+    <script src="engine/index.js"></script>
+    <!--<script src="engine/d3v4.min.js" charset="utf-8"></script>
+    <script src="engine/charts.min.js" charset="utf-8"></script>
+    <script src="engine/billboard.min.js"></script>-->
+    <script src="engine/pptxgen.min.js"></script>
+                                                   <script src="engine/pfill.js"></script>
+    <script src="engine/published.js"></script>
+
+    <script>
+      Reveal.configure({
+        progress: true,
+        keyboard: true,
+        dependencies: [
+          {
+            src: "engine/highlight.js",
+            sync: true,
+            callback: function () {
+              hljs.initHighlightingOnLoad();
+            },
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>
